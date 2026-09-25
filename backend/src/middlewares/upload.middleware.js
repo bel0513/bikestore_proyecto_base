@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const multer = require('multer');
 const AppError = require('../utils/AppError');
 
@@ -7,7 +8,9 @@ const ALLOWED_MIME = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_SIZE = 2 * 1024 * 1024;
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, UPLOAD_DIR),
+    destination: (req, file, cb) => {
+        fs.mkdir(UPLOAD_DIR, { recursive: true }, (error) => cb(error, UPLOAD_DIR));
+    },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname).toLowerCase();
         const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
