@@ -22,7 +22,15 @@ export default function TeamTable({ equipos, canDelete, onEdit, onDelete }) {
                     return (
                         <div className="equipo-card" key={equipos.id_equipos}>
                             <div className="equipo-card-image">
-                                {imagen ? <img src={imagen} alt={equipos.nombre} /> : <Package size={32} />}
+                                {imagen ? (
+                                    <img
+                                        src={imagen}
+                                        alt={equipos.nombre}
+                                        onError={(event) => {
+                                            event.currentTarget.style.display = 'none';
+                                        }}
+                                    />
+                                ) : <Package size={32} />}
                             </div>
 
                             <div className="equipo-card-body">

@@ -25,7 +25,7 @@ export default function TeamForm({ editing, onSubmit, onCancel }) {
     }
 
     function changeImagen(event) {
-        const file = event.target.file?.[0];
+        const file = event.target.files?.[0];
         if (!file) return;
 
         setImageFile(file);
@@ -51,7 +51,7 @@ export default function TeamForm({ editing, onSubmit, onCancel }) {
 
             <label className="image-upload-field">
                 <span><ImagePlus size={16} /> Imagen del equipo</span>
-                <input ref={fileInputRef} type="file" accept="image/jpeg,image/ng,image/webp" onChange={changeImagen} />
+                <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp" onChange={changeImagen} />
             </label>
 
             {preview && (
